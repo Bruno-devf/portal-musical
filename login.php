@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/login.css">
     <title>Login</title>
 </head>
 <body>
@@ -16,11 +16,11 @@
             </div>
             <div class="card-group">
                 <label>Email</label>
-                <input type="email" name="email" placeholder="Digite seu Email" id="" required>
+                <input type="email" name="email" placeholder="Digite seu Email" required>
             </div>
             <div class="card-group">   
                 <label>Senha</label>
-                <input type="password" name="senha" placeholder="Digite sua Senha" id="" required>
+                <input type="password" name="senha" placeholder="Digite sua Senha" required>
             </div>
             <div class="card-group btn">   
                 <button type="submit">Acessar</button>
