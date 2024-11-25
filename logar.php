@@ -6,7 +6,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $login = $_POST['email'];
     $senha = $_POST['senha'];
 
-    $stmt = $conn->prepare("SELECT * FROM usuario WHERE email = ?");
+    $stmt = $conn->prepare("SELECT * FROM usuario WHERE login = ?");
     $stmt->bind_param("s", $login);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -15,13 +15,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $user = $result->fetch_assoc();
         if ($senha === $user['senha']) {
             $_SESSION['user'] = $user['nome'];
-            header('Location: index.php');
+            header('Location: index1.php');
             exit();
         } else {
-            echo "Email ou senha incorretos.";
+            echo "Login ou senha incorretos.";
         }
     } else {
-        echo "Email ou senha incorretos.";
+        echo "Login ou senha incorretos.";
     }
 }
 ?>

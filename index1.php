@@ -1,3 +1,12 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['user'])) {
+    header('Location: login.php');
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -18,10 +27,13 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <span class="navbar-text mr-3">Bem-vindo, Leitor !</span>
+                    <span class="navbar-text mr-3">Bem-vindo, <?php echo $_SESSION['user']; ?>!</span>
                 </li>
                 <li class="nav-item">
-                    <a class="btn btn-outline-danger" href="login.php">Entrar na Conta</a>
+                    <a class="btn btn-outline-secondary" href="addnew.php">Adicionar Notícias</a>
+                </li>
+                <li class="nav-item ml-3">
+                    <a class="btn btn-outline-danger" href="logout.php">Sair da conta</a>
                 </li>
             </ul>
         </div>
