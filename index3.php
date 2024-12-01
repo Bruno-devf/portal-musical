@@ -1,10 +1,17 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['user'])) {
+// Verifica se o usuário está logado e se é um administrador
+if (!isset($_SESSION['user']) || $_SESSION['role'] !== 'admin') {
+    // Se não estiver logado ou não for admin, redireciona para a página de login
     header('Location: login.php');
     exit();
 }
+
+require 'config.php';
+
+// Consulta para pegar todas as notícias aprovadas
+$result = $conn->query("SELECT * FROM noticias WHERE status = 'aprovado' ORDER BY data_criacao DESC");
 ?>
 
 <!DOCTYPE html>
@@ -15,10 +22,69 @@ if (!isset($_SESSION['user'])) {
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/principal.css">
     <title>Portal Para o Mundo da Música - Admin</title>
+    <style>
+        .card {
+            margin-bottom: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: none;
+        }
+
+        .card-img-top {
+            object-fit: cover;
+            height: 300px;
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .card-body h5 {
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        .card-body p {
+            font-size: 16px;
+            color: #555;
+        }
+
+        /* Hover: aumentar o tamanho do card e adicionar sombra 3D */
+        .card:hover {
+            transform: translateY(-10px); 
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); 
+        }
+
+        /* Responsividade: ajusta as colunas dependendo do tamanho da tela */
+        @media (max-width: 768px) {
+            .card-img-top {
+                height: 200px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .card-img-top {
+                height: 150px;
+            }
+        }
+
+        /* Footer */
+        footer {
+            background-color: #f8f9fa;
+            padding: 20px 0;
+            text-align: center;
+            border-top: 1px solid #ddd;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 14px;
+            color: #555;
+        }
+
+    </style>
 </head>
 
 <body>
-    <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#">Mundo da Música - Admin</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,7 +96,7 @@ if (!isset($_SESSION['user'])) {
                     <span class="navbar-text mr-3">Bem-vindo, <?php echo $_SESSION['user']; ?>!</span>
                 </li>
                 <li class="nav-item">
-                    <a class="btn btn-outline-secondary" href="addnew.php">Adicionar Notícias</a>
+                    <a class="btn btn-outline-secondary" href="addnew1.php">Adicionar Notícias</a>
                 </li>
                 <li class="nav-item ml-3">
                     <a class="btn btn-outline-primary" href="requisicoes.php">Área de Requisições</a>
@@ -44,12 +110,29 @@ if (!isset($_SESSION['user'])) {
 
     <!-- Conteúdo principal -->
     <div class="container mt-4">
-        <div class="card">
-            <h1>Página Inicial</h1>
-            <p>Bem-vindo ao painel administrativo do Mundo da Música. Aqui você pode gerenciar notícias, aprovar tarefas e realizar outras atividades administrativas.</p>
+        <h1 class="mb-4">Notícias Aprovadas</h1>
+
+        <div class="row">
+            <?php while ($row = $result->fetch_assoc()): ?>
+                <div class="col-md-4 col-sm-6 col-12">
+                    <div class="card">
+                        <img src="<?php echo $row['imagem']; ?>" class="card-img-top" alt="Imagem da Notícia">
+                        <div class="card-body">
+                            <h5 class="card-title"><?php echo $row['titulo']; ?></h5>
+                            <p class="card-text"><?php echo substr($row['conteudo'], 0, 150); ?>...</p>
+                        </div>
+                    </div>
+                </div>
+            <?php endwhile; ?>
         </div>
     </div>
 
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 ETEC de Guarulhos. Todos os direitos reservados.</p>
+    </footer>
+
+    <!-- Scripts do Bootstrap -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

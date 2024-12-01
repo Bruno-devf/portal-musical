@@ -1,3 +1,51 @@
+<?php
+session_start();
+require 'config.php'; // Conexão com o banco de dados
+
+// Verifica se o formulário foi enviado
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Sanitiza e valida o email
+    $login = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+    $senha = $_POST['senha'];
+
+    // Prepara uma consulta para verificar se o login existe no banco de dados
+    $stmt = $conn->prepare("SELECT * FROM usuario WHERE login = ?");
+    $stmt->bind_param("s", $login);
+    $stmt->execute();
+    $resultado = $stmt->get_result();
+
+    // Verifica se o usuário existe
+    if ($resultado->num_rows > 0) {
+        $user = $resultado->fetch_assoc();
+
+        // Verifica se a senha é correta (sem hash, comparação direta)
+        if ($senha === $user['senha']) {
+            // Salva os dados do usuário na sessão
+            $_SESSION['user_id'] = $user['idusuario']; // ID do usuário
+            $_SESSION['user'] = $user['nome']; // Nome do usuário
+            $_SESSION['role'] = $user['role']; // Função do usuário (admin, escritor, etc.)
+
+            // Redireciona com base no papel do usuário
+            if ($user['role'] === 'admin') {
+                // Redireciona para o painel administrativo
+                header('Location: index3.php');
+                exit(); // Termina a execução após o redirecionamento
+            } elseif ($user['role'] === 'escritor') {
+                // Redireciona para a página do escritor
+                header('Location: index1.php');
+                exit(); // Termina a execução após o redirecionamento
+            }
+        } else {
+            // Senha incorreta
+            $erro = "Senha incorreta.";
+        }
+    } else {
+        // Usuário não encontrado
+        $erro = "Usuário não encontrado.";
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -7,27 +55,35 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <title>Login</title>
 </head>
-<body>    
+<body>
     <a href="index.php" class="btn btn-secondary" style="position: absolute; top: 10px; left: 40px;">Voltar</a>
-
-    <form class="form" action="logar.php" method="POST">
+    
+    <form class="form" action="" method="POST">
         <div class="card">
             <div class="card-top">
-                <img class="img-login" src="img/perfil.png" alt="">
                 <h2 class="titulo">Painel de Login</h2>
                 <p>Insira seus dados</p>
             </div>
+
+            <!-- Exibição de erro, se houver -->
+            <?php if (isset($erro)): ?>
+                <div class="alert alert-danger" role="alert">
+                    <?php echo $erro; ?>
+                </div>
+            <?php endif; ?>
+
             <div class="card-group">
-                <label>Email</label>
-                <input type="email" name="email" placeholder="Digite seu Email" required>
+                <label for="email">E-mail</label>
+                <input type="email" id="email" name="email" placeholder="Digite seu e-mail" required>
             </div>
             <div class="card-group">
-                <label>Senha</label>
-                <input type="password" name="senha" placeholder="Digite sua Senha" required>
+                <label for="senha">Senha</label>
+                <input type="password" id="senha" name="senha" placeholder="Digite sua Senha" required>
             </div>
+
             <a class="au" href="cadastro.php">Não tem conta? Cadastre-se aqui</a>
             <div class="card-group btn">
-                <button type="submit">Acessar</button>
+                <button type="submit" class="btn btn-primary">Acessar</button>
             </div>
         </div>
     </form>

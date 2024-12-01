@@ -5,12 +5,12 @@ session_start();  // Certifique-se de que a sessão seja iniciada
 $msg = '';
 $msg_type = ''; // Sucesso ou erro
 
-// Verifica se o usuário está logado e se é admin ou escritor
+// Verifica se o usuário está logado e se tem o role de 'admin' ou 'escritor'
 if (!isset($_SESSION['user_id']) || !in_array($_SESSION['role'], ['admin', 'escritor'])) {
-    $msg = "Você precisa estar logado como escritor ou admin para adicionar notícias ou eventos.";
+    $msg = "Você precisa estar logado como administrador ou escritor para adicionar notícias.";
     $msg_type = 'danger'; // Define a cor do alerta como vermelho para erro
 } else {
-    // Restante do código de adição de notícias ou eventos
+    // Restante do código de adição de notícias
     require 'config.php';
 
     // Verifica se o formulário foi enviado
@@ -43,16 +43,16 @@ if (!isset($_SESSION['user_id']) || !in_array($_SESSION['role'], ['admin', 'escr
             }
         }
 
-        // Prepara a consulta para inserir a notícia ou evento
+        // Prepara a consulta para inserir a notícia
         $stmt = $conn->prepare("INSERT INTO noticias (titulo, conteudo, autor_id, imagem) VALUES (?, ?, ?, ?)");
         $stmt->bind_param("ssis", $titulo, $conteudo, $autor_id, $imagem); // 's' para string, 'i' para inteiro
 
         // Executa a consulta e verifica se ocorreu sucesso
         if ($stmt->execute()) {
-            $msg = "Notícia ou Evento salvo e aguardando confirmação.";
+            $msg = "Notícia salva e aguardando confirmação.";
             $msg_type = 'success';
         } else {
-            $msg = "Erro ao adicionar notícia ou evento: " . $stmt->error;
+            $msg = "Erro ao adicionar notícia: " . $stmt->error;
             $msg_type = 'danger';
         }
 
@@ -68,7 +68,7 @@ if (!isset($_SESSION['user_id']) || !in_array($_SESSION['role'], ['admin', 'escr
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <title>Adicionar Notícia ou Evento</title>
+    <title>Adicionar Notícia</title>
     <style>
         /* CSS para garantir que o alerta esteja fixo na parte inferior e centralizado */
         .alert-container {
@@ -93,9 +93,6 @@ if (!isset($_SESSION['user_id']) || !in_array($_SESSION['role'], ['admin', 'escr
                 <li class="nav-item">
                     <span class="navbar-text mr-3">Bem-vindo, <?php echo $_SESSION['user']; ?>!</span>
                 </li>
-                <li class="nav-item">
-                    <a class="btn btn-outline-secondary" href="addnew.php">Adicionar Notícias/Evento</a>
-                </li>
                 <li class="nav-item ml-3">
                     <a class="btn btn-outline-danger" href="logout.php">Sair da conta</a>
                 </li>
@@ -105,8 +102,8 @@ if (!isset($_SESSION['user_id']) || !in_array($_SESSION['role'], ['admin', 'escr
 
     <!-- Conteúdo principal -->
     <div class="container mt-4">
-        <a href="index1.php" class="btn btn-secondary" style="position: absolute; top: 60px; left: 40px;">Voltar</a>
-        <h2>Adicionar Notícia ou Evento</h2>
+        <a href="index3.php" class="btn btn-secondary" style="position: absolute; top: 60px; left: 40px;">Voltar</a>
+        <h2>Adicionar Notícia</h2>
         <form action="addnew.php" method="POST" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="titulo">Título</label>
@@ -120,14 +117,7 @@ if (!isset($_SESSION['user_id']) || !in_array($_SESSION['role'], ['admin', 'escr
                 <label for="imagem">Imagem</label>
                 <input type="file" class="form-control-file" id="imagem" name="imagem">
             </div>
-            <div class="form-group">
-                <label for="tipo">Tipo</label>
-                <select class="form-control" id="tipo" name="tipo" required>
-                    <option value="noticia">Notícia</option>
-                    <option value="evento">Evento</option>
-                </select>
-            </div>
-            <button type="submit" class="btn btn-primary">Adicionar</button>
+            <button type="submit" class="btn btn-primary">Adicionar Notícia</button>
         </form>
     </div>
 
