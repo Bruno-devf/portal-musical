@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 01/12/2024 às 02:16
--- Versão do servidor: 10.4.32-MariaDB
--- Versão do PHP: 8.2.12
+-- Tempo de geração: 03/12/2024 às 01:19
+-- Versão do servidor: 10.4.28-MariaDB
+-- Versão do PHP: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -42,10 +42,12 @@ CREATE TABLE `noticias` (
 --
 
 INSERT INTO `noticias` (`id`, `titulo`, `conteudo`, `data_criacao`, `autor_id`, `status`, `imagem`) VALUES
-(2, 'daf df', 'VDVEW', '2024-12-01 00:18:21', 6, 'aprovado', 0x75706c6f61642f436170747572612064652074656c6120323032342d31312d3036203138303834382e706e67),
-(3, 'daf df', 'ASV.KHEVHJbvshv ', '2024-12-01 00:20:05', 6, 'aprovado', 0x75706c6f61642f436170747572612064652074656c6120323032342d31302d3233203032333535322e706e67),
-(6, 'LWHDBV', 'dvvSDBddb', '2024-12-01 00:37:52', 5, 'pendente', 0x75706c6f61642f436170747572612064652074656c6120323032342d31312d3036203138303834382e706e67),
-(7, '\\kjcxb lSDHB KL JBSLJK Bslb l', 'çakjsbijsadbpjibsdivbvoiasdbvoudsfbvouysdvuodsbusbhasbsbcousadvouasdbvusgkhsviuygkuydgci7sAGDKDUCDI7SGXKUHG7FWDD', '2024-12-01 01:14:05', 5, 'pendente', 0x75706c6f61642f436170747572612064652074656c6120323032342d31302d3233203033303035392e706e67);
+(8, 'Kanye West Inocentado Com O Tempo???', 'Após as polemicas envolvendo o rapper e produtor P Diddy, surgiu um questionamento entres os internautas, seria o Kanye West o verdadeiro visionário?\r\nDesde muito tempo não é novidade que o Kanye West vem sendo taxado como louco por suas falas extremamente questionáveis, mas uma coisa é certa, o mesmo sempre veio denuncia várias coisas que vem acontecendo em hollywood e entre vários famosos, porém, sempre foi taxado de maluco por suas acusações mas pelo jeito o jogo virou.\r\nVários fans vem falando coisas como \"não é o Kanye West que está mentindo, e sim a verdade que esta errada\" ou \"No dia que o Kanye West estiver errado o mundo estará perdido\".\r\nApesar de certa forma o mesmo está certo sobre várias de suas acusações, será que Kanye West esta realmente Lucido? vai da opinião do leitor decidir isso.', '2024-12-02 22:30:40', 3, 'aprovado', 0x75706c6f61642f79652e706e67),
+(9, 'Feliz Aniversário Juicy Wrld', 'Hoje, dia 2 de dezembro de 2024 é aniversário de umas das grandes lendas do soundcloud rap, Jarad Anthony Higgins ou popurlamente conhecido como Juicy Wrld, o mesmo faria 26 anos hoje se ele não tivesse morrido de overdose no dia 8 de dezembro de 2019 no \r\nAdvocate Christ Medical Center.\r\nNão usem drogas rapaziada.', '2024-12-02 23:44:19', 3, 'aprovado', 0x75706c6f61642f6a756963792e6a7067),
+(10, 'Tyler The Creator Fala Da Sua Esperiencia Com Limão', 'Tyler the creator fala sobre a sua primeira esperiencia com limão, \"É azedo\" disse tyler.', '2024-12-02 23:50:43', 3, 'aprovado', 0x75706c6f61642f74796c65722e706e67),
+(11, 'Travis Scott É Visto Sendo Confundido Com Um Peixe', 'Travis Scott foi visto sendo comparado com um peixe \"eu não sou o Travis, eu sou o peixonauta\" disse o Travis Scott.', '2024-12-02 23:56:33', 3, 'aprovado', 0x75706c6f61642f7472617669732e6a706567),
+(12, 'Travis Scott', 'Travis Scott', '2024-12-02 23:57:18', 3, 'pendente', 0x75706c6f61642f7472617669732d73636f74742e706e67),
+(13, 'Mc Kung Fu Panda desiste da profissão e vira agressor', 'O famigerado Pô, mais conhecido mundialmente Kung Fu Panda, decidiu desistir da carreira de Dragão Guerreiro, detentor das artes marciais místicas para se tornar agressor doméstico e cantor de funk, com seus trabalho mais conhecidos a voadora na cara de sua namorada \"Gi Roque\" e seu verso na musica com MC IG, onde o ex-dragão guerreiro diz : \"nois come bosta\". Será que ele fez a escolha certa ? ', '2024-12-03 00:14:06', 3, 'aprovado', 0x75706c6f61642f70616e64612e6a7067);
 
 -- --------------------------------------------------------
 
@@ -99,7 +101,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de tabela `noticias`
 --
 ALTER TABLE `noticias`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de tabela `usuario`

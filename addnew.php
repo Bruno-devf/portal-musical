@@ -93,9 +93,6 @@ if (!isset($_SESSION['user_id']) || !in_array($_SESSION['role'], ['admin', 'escr
                 <li class="nav-item">
                     <span class="navbar-text mr-3">Bem-vindo, <?php echo $_SESSION['user']; ?>!</span>
                 </li>
-                <li class="nav-item">
-                    <a class="btn btn-outline-secondary" href="addnew.php">Adicionar Notícias/Evento</a>
-                </li>
                 <li class="nav-item ml-3">
                     <a class="btn btn-outline-danger" href="logout.php">Sair da conta</a>
                 </li>
@@ -119,13 +116,6 @@ if (!isset($_SESSION['user_id']) || !in_array($_SESSION['role'], ['admin', 'escr
             <div class="form-group">
                 <label for="imagem">Imagem</label>
                 <input type="file" class="form-control-file" id="imagem" name="imagem">
-            </div>
-            <div class="form-group">
-                <label for="tipo">Tipo</label>
-                <select class="form-control" id="tipo" name="tipo" required>
-                    <option value="noticia">Notícia</option>
-                    <option value="evento">Evento</option>
-                </select>
             </div>
             <button type="submit" class="btn btn-primary">Adicionar</button>
         </form>

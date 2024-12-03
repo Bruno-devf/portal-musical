@@ -41,36 +41,8 @@ $result = $stmt->get_result();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/principal.css">
+    <link rel="stylesheet" href="css/requi.css">
     <title>Área de Requisições - Mundo da Música</title>
-    <style>
-        .card {
-            margin-bottom: 20px;
-            height: 600px;
-        }
-        .card-img-top {
-            width: 100%; /* A imagem ocupa toda a largura do card */
-            height: 250px; /* Define a altura da imagem */
-            object-fit: cover; /* Ajusta a imagem para cobrir o espaço sem distorcer */
-        }
-        .card-body {
-            padding-top: 15px;
-        }
-        .card-title {
-            font-size: 1.5rem; /* Tamanho do título */
-            font-weight: bold;
-        }
-        .card-text {
-            font-size: 1rem; /* Tamanho do texto */
-        }
-        .card-footer {
-            display: flex;
-            justify-content: flex-start;
-        }
-        .card-footer .btn {
-            margin-right: 10px;
-        }
-    </style>
 </head>
 
 <body>
@@ -97,6 +69,7 @@ $result = $stmt->get_result();
 
     <!-- Conteúdo principal -->
     <div class="container mt-4">
+    <a href="index3.php" class="btn btn-secondary" style="position: absolute; top: 60px; left: 40px;">Voltar</a>
         <h2>Notícias Pendentes</h2>
         <div class="row">
             <?php
