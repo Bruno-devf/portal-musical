@@ -1,10 +1,9 @@
 <?php
 session_start();
-require 'config.php'; // Conexão com o banco de dados
+require 'config.php';
 
 // Verifica se o formulário foi enviado
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Sanitiza e valida o email
     $login = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
     $senha = $_POST['senha'];
 
@@ -18,12 +17,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($resultado->num_rows > 0) {
         $user = $resultado->fetch_assoc();
 
-        // Verifica se a senha é correta (sem hash, comparação direta)
+        // Verifica se a senha é correta
         if ($senha === $user['senha']) {
             // Salva os dados do usuário na sessão
             $_SESSION['user_id'] = $user['idusuario']; // ID do usuário
             $_SESSION['user'] = $user['nome']; // Nome do usuário
-            $_SESSION['role'] = $user['role']; // Função do usuário (admin, escritor, etc.)
+            $_SESSION['role'] = $user['role']; // Função do usuário (admin e escritor)
 
             // Redireciona com base no papel do usuário
             if ($user['role'] === 'admin') {
@@ -33,14 +32,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             } elseif ($user['role'] === 'escritor') {
                 // Redireciona para a página do escritor
                 header('Location: index1.php');
-                exit(); // Termina a execução após o redirecionamento
+                exit();
             }
         } else {
-            // Senha incorreta
             $erro = "Senha incorreta.";
         }
     } else {
-        // Usuário não encontrado
         $erro = "Usuário não encontrado.";
     }
 }

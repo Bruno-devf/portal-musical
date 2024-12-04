@@ -1,5 +1,5 @@
 <?php
-session_start();  // Certifique-se de que a sessão seja iniciada
+session_start();
 
 // Inicializa as variáveis para as mensagens
 $msg = '';
@@ -10,7 +10,6 @@ if (!isset($_SESSION['user_id']) || !in_array($_SESSION['role'], ['admin', 'escr
     $msg = "Você precisa estar logado como escritor ou admin para adicionar notícias ou eventos.";
     $msg_type = 'danger'; // Define a cor do alerta como vermelho para erro
 } else {
-    // Restante do código de adição de notícias ou eventos
     require 'config.php';
 
     // Verifica se o formulário foi enviado
@@ -70,7 +69,6 @@ if (!isset($_SESSION['user_id']) || !in_array($_SESSION['role'], ['admin', 'escr
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <title>Adicionar Notícia ou Evento</title>
     <style>
-        /* CSS para garantir que o alerta esteja fixo na parte inferior e centralizado */
         .alert-container {
             position: fixed;
             bottom: 20px;
@@ -84,7 +82,7 @@ if (!isset($_SESSION['user_id']) || !in_array($_SESSION['role'], ['admin', 'escr
 <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Mundo da Música - Admin</a>
+        <a class="navbar-brand" href="#">Mundo da Música - Escritor</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>

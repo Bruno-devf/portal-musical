@@ -7,7 +7,6 @@ if (!isset($_SESSION['user']) || $_SESSION['role'] !== 'admin') {
     exit();
 }
 
-// Conexão com o banco de dados
 require 'config.php';
 
 // Processamento de aprovação ou exclusão
